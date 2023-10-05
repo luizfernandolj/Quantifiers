@@ -1,4 +1,8 @@
-from QuantifiersLibrary.interface_class.Quantifier import Quantifier
+import sys
+
+sys.path.insert(1, 'C:\\Users\\Luiz Fernando\\JupyterFiles\\Quantifier-project\\Quantifiers')
+
+from interface_class.Quantifier import Quantifier
 
 import pandas as pd
 import numpy as np

@@ -1,5 +1,9 @@
-from QuantifiersLibrary.interface_class.Quantifier import Quantifier
-from QuantifiersLibrary.utils import Quantifier_Utils as utils
+import sys
+
+sys.path.insert(1, 'C:\\Users\\Luiz Fernando\\JupyterFiles\\Quantifier-project\\Quantifiers')
+
+from interface_class.Quantifier import Quantifier
+from utils import Quantifier_Utils as utils
 
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split

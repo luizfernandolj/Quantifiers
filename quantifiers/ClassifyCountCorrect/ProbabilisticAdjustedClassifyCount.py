@@ -1,5 +1,9 @@
-from QuantifiersLibrary.interface_class.Quantifier import Quantifier
-from QuantifiersLibrary.utils.Quantifier_Utils import TPRandFPR
+import sys
+
+sys.path.insert(1, 'C:\\Users\\Luiz Fernando\\JupyterFiles\\Quantifier-project\\Quantifiers')
+
+from interface_class.Quantifier import Quantifier
+from utils.Quantifier_Utils import TPRandFPR
 
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
