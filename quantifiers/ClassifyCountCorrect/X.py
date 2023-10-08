@@ -11,7 +11,7 @@ from sklearn import datasets
 
 import pandas as pd
 
-class X(Quantifier):
+class Xqtf(Quantifier):
 
     def __init__(self, classifier):
         self.classifier = classifier
