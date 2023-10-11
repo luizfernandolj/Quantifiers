@@ -28,7 +28,12 @@ class T50(Quantifier):
         class_prop = len([pos_score for pos_score in pos_scores if pos_score >= threshold])
         class_prop /= len(scores)
 
-        pos_prop = round(abs(class_prop - fpr) / abs(tpr - fpr), 2)  # adjusted class proportion
+        diff_tpr_fpr = abs(tpr - fpr)
+
+        if diff_tpr_fpr.tolist()[0] == 0:
+            pos_prop = round(abs(class_prop))
+        else:
+            pos_prop = round(abs(class_prop - fpr) / abs(tpr - fpr), 2)  # adjusted class proportion
 
         if pos_prop <= 0:  # clipping the output between [0,1]
             pos_prop = 0

@@ -27,8 +27,12 @@ class Xqtf(Quantifier):
         class_prop = len([pos_score for pos_score in pos_scores if pos_score >= threshold])
         class_prop /= len(scores)
 
-        # adjusted class proportion
-        pos_prop = round(abs(class_prop - fpr) / abs(tpr - fpr), 2)
+        diff_tpr_fpr = abs(tpr - fpr)
+        if diff_tpr_fpr.tolist()[0] == 0:
+            pos_prop = round(abs(class_prop))
+        else:
+            # adjusted class proportion
+            pos_prop = round(abs(class_prop - fpr) / abs(tpr - fpr), 2)
 
         # clipping the output between [0,1]
         if pos_prop <= 0:
@@ -72,23 +76,3 @@ class Xqtf(Quantifier):
 
         # Class proportion generated through the main algorithm
         return self.get_class_proportion(scores)
-
-
-if __name__ == '__main__':
-    data = datasets.load_breast_cancer()
-
-    dts_data = pd.DataFrame(data['data'], columns=data.feature_names)
-    dts_data['class'] = data.target
-
-    data = dts_data.drop(['class'], axis='columns')
-    label = dts_data['class']
-
-    X_trainn, X_testt, y_trainn, y_testt = train_test_split(data, label, test_size=0.33)
-
-    knn = KNeighborsClassifier(n_neighbors=7)
-    x_quantifier = X(knn)
-    x_quantifier.fit(X_trainn, y_trainn)
-    class_distribution = x_quantifier.predict(X_testt)
-
-    print(x_quantifier.classifier.classes_)
-    print(class_distribution)

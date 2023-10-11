@@ -42,7 +42,11 @@ class ProbabilisticAdjustedClassifyCount(Quantifier):
         pos_proportion = result[1]
 
         # Counting result_table for positive class
-        pos_adjusted = (pos_proportion - self.tprfpr['fpr']) / diff_tprfpr
+        if diff_tprfpr.iloc[0] == 0:
+            pos_adjusted = pos_proportion
+        else:
+            pos_adjusted = (pos_proportion - self.tprfpr['fpr']) / diff_tprfpr
+
 
         # Transforming to float
         pos_adjusted = round(float(pos_adjusted.iloc[0]), 2)

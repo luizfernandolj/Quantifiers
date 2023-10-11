@@ -42,11 +42,11 @@ class MedianSweep(Quantifier):
 
             diff_tpr_fpr = abs(tpr - fpr)
             
-            if diff_tpr_fpr.empty:
-                final_prevalence = estimated_positive_ratio
+            if diff_tpr_fpr.tolist()[0] == 0:
+                final_prevalence = round(abs(estimated_positive_ratio))
             else:
                 # Calculating the positive class proportion
-                final_prevalence = round(abs(estimated_positive_ratio - fpr) / diff_tpr_fpr, 2)
+                final_prevalence = round(abs(estimated_positive_ratio - fpr) / diff_tpr_fpr, 2).tolist()[0]
 
             # Appending to the array
             prevalances_array.append(final_prevalence)

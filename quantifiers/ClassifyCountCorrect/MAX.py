@@ -31,7 +31,11 @@ class MAX(Quantifier):
         class_prop /= len(scores)
 
         # adjusted class proportion
-        pos_prop = round(abs(class_prop - fpr) / abs(tpr - fpr), 2)
+        diff_tpr_fpr = abs(tpr - fpr)
+        if diff_tpr_fpr.tolist()[0] == 0:
+            pos_prop = round(abs(class_prop))
+        else:
+            pos_prop = round(abs(class_prop - fpr) / abs(tpr - fpr), 2)
 
         # clipping the output between [0,1]
         if pos_prop <= 0:
