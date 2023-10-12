@@ -25,7 +25,7 @@ class Experiments:
         self.clf = clf
         self.thr = thr
         # self.quantifiers = ["CC", "ACC", "PCC", "PACC", "X", "MAX", "T50", "MS", "HDy", "DyS", "SORD"]
-        self.quantifiers = ["MS"]
+        self.quantifiers = ["CC", "ACC", "PCC", "PACC", "X", "MAX", "T50", "MS", "HDy", "DyS", "SORD"]
         self.quantifiers_initialized = {}
         self.measure = "Topsoe"
         columns = ["sample", "Test_size", "alpha", "actual_prop", "pred_prop", "abs_error", "quantifier"]
@@ -165,18 +165,18 @@ class Experiments:
 
 if __name__ == '__main__':
     data1 = pd.read_csv(
-        "C:\\data\\AedesSex.csv")
+        "C:\\Users\\luiz_\\Jupyter\\Quantifiers\\data\\AedesSex.csv")
     data1['class'] = data1['class'].map(lambda x: 0 if x == 2 else 1)
 
     data2 = pd.read_csv(
-        "C:\\data\\BNG.csv")
+        "C:\\Users\\luiz_\\Jupyter\\Quantifiers\\data\\BNG.csv")
     data2['class'] = data2['class'].map(lambda x: 0 if x == 2 else 1)
 
     data3 = pd.read_csv(
-        "C:\\data\\click-prediction.csv")
+        "C:\\Users\\luiz_\\Jupyter\\Quantifiers\\data\\click-prediction.csv")
     data3['class'] = data3['class'].map(lambda x: 0 if x == 2 else 1)
 
-    datas = [data3]
+    datas = [data1, data2, data3]
 
     for i, data in enumerate(datas):
         X = data.iloc[:, 1:]
@@ -190,5 +190,5 @@ if __name__ == '__main__':
         experiment = Experiments(train_test, 3, range(10, 101, 10), 11, clf, 0.5)
         experiment.make_experiment()
 
-        path = f"C:\\data\\experiment{i + 1}.csv"
+        path = f"C:\\Users\\luiz_\\Jupyter\\Quantifiers\\experiments\\experiment{i + 1}.csv"
         experiment.return_table().to_csv(path, index=False)

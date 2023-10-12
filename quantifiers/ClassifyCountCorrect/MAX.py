@@ -32,7 +32,7 @@ class MAX(Quantifier):
 
         # adjusted class proportion
         diff_tpr_fpr = abs(tpr - fpr)
-        if diff_tpr_fpr.tolist()[0] == 0:
+        if diff_tpr_fpr == 0:
             pos_prop = round(abs(class_prop))
         else:
             pos_prop = round(abs(class_prop - fpr) / abs(tpr - fpr), 2)

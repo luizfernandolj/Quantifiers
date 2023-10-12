@@ -28,7 +28,7 @@ class Xqtf(Quantifier):
         class_prop /= len(scores)
 
         diff_tpr_fpr = abs(tpr - fpr)
-        if diff_tpr_fpr.tolist()[0] == 0:
+        if diff_tpr_fpr == 0:
             pos_prop = round(abs(class_prop))
         else:
             # adjusted class proportion
