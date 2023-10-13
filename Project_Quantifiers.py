@@ -27,7 +27,7 @@ class Experiments:
         # self.quantifiers = ["CC", "ACC", "PCC", "PACC", "X", "MAX", "T50", "MS", "HDy", "DyS", "SORD"]
         self.quantifiers = ["CC", "ACC", "PCC", "PACC", "X", "MAX", "T50", "MS", "HDy", "DyS", "SORD"]
         self.quantifiers_initialized = {}
-        self.measure = "Topsoe"
+        self.measure = ['topsoe', 'probsymm', 'hellinger']
         columns = ["sample", "Test_size", "alpha", "actual_prop", "pred_prop", "abs_error", "quantifier"]
         self.table = pd.DataFrame(columns=columns)
 
@@ -145,7 +145,7 @@ class Experiments:
                         # .............Calling of Methods.................
                         pred_pos_prop = self.apply_quantifier(quantifier=iquantifier, clf=self.clf,
                                                               thr=self.thr,
-                                                              measure=self.measure,
+                                                              measure=self.measure[iteration],
                                                               train=[self.train_test[0], self.train_test[2]],
                                                               test=testX)
                         pred_pos_prop = round(pred_pos_prop[1], 2)  # Getting only the positive proportion
@@ -161,7 +161,7 @@ class Experiments:
 
     def return_table(self):
         return self.table
-
+    
 
 if __name__ == '__main__':
     data1 = pd.read_csv(
